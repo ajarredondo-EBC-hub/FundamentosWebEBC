@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-labelledby="title">
+  <title id="title">Flan con caramelo</title>
+  <rect width="640" height="400" fill="#f7f5ef"/>
+  <ellipse cx="320" cy="312" rx="190" ry="38" fill="#e1d7c6"/>
+  <path d="M190 180h260l-32 119c-5 20-23 34-44 34h-108c-21 0-39-14-44-34z" fill="#f2c66d" stroke="#9b5b24" stroke-width="8"/>
+  <path d="M190 180c0-34 58-62 130-62s130 28 130 62-58 48-130 48-130-14-130-48z" fill="#ffd982" stroke="#9b5b24" stroke-width="8"/>
+  <path d="M202 177c35-21 75-28 118-28 45 0 84 8 118 28-29 17-70 25-118 25s-89-8-118-25z" fill="#b85d28"/>
+  <path d="M320 148c4-26 27-34 46-23 20 12 13 32-1 48" fill="none" stroke="#b85d28" stroke-linecap="round" stroke-width="12"/>
+  <circle cx="337" cy="136" r="7" fill="#f6d582"/>
+</svg>

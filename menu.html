@@ -1,0 +1,434 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Menú</title>
+	<link rel="stylesheet" href="styles.css">
+	<style>
+		.menu-page .menu-tabs > [role="tablist"] {
+			display: flex;
+			gap: 0.5rem;
+			margin-bottom: 1rem;
+			overflow-x: auto;
+		}
+		.menu-page [role="tab"] {
+			flex: 0 0 auto;
+			padding: 0.7rem 1rem;
+			border: 0;
+			border-radius: 0.35rem;
+			background: var(--verde-oscuro);
+			color: white;
+			cursor: pointer;
+			font: inherit;
+		}
+		.menu-page [role="tab"][aria-selected="true"] {
+			background: var(--rojo);
+		}
+		.menu-page [role="tab"]:focus-visible,
+		.menu-page .dish-select:focus-visible,
+		.menu-page .choose-dishes:focus-visible {
+			outline: 3px solid var(--fucsia);
+			outline-offset: 3px;
+		}
+		.menu-page .choose-dishes,
+		.menu-page .dish-select {
+			padding: 0.7rem 1rem;
+			border: 0;
+			border-radius: 0.35rem;
+			background: var(--verde-oscuro);
+			color: white;
+			cursor: pointer;
+			font: inherit;
+			font-weight: 700;
+		}
+		.menu-page .choose-dishes {
+			margin: 0.5rem 0 1.5rem;
+			background: var(--rojo);
+		}
+		.menu-page .specials-button {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.65rem;
+			margin: 0 0 1.5rem 0.75rem;
+			padding: 0.85rem 1.25rem;
+			border: 2px solid #f6d582;
+			border-radius: 999px;
+			background: linear-gradient(135deg, #b85d28, var(--rojo));
+			box-shadow: 0 5px 14px rgb(198 40 40 / 30%);
+			color: white;
+			cursor: pointer;
+			font: inherit;
+			font-weight: 700;
+			transition: transform 160ms ease, box-shadow 160ms ease;
+		}
+		.menu-page .specials-button:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 8px 18px rgb(198 40 40 / 38%);
+		}
+		.menu-page .specials-button:focus-visible {
+			outline: 3px solid var(--fucsia);
+			outline-offset: 3px;
+		}
+		.menu-page .specials-badge {
+			padding: 0.15rem 0.45rem;
+			border-radius: 999px;
+			background: #f6d582;
+			color: #4a2a12;
+			font-size: 0.75rem;
+			letter-spacing: 0.04em;
+		}
+		.menu-page .menu-tabs > [role="tabpanel"] {
+			margin-bottom: 1.25rem;
+		}
+		.menu-page .dish-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+			gap: 1rem;
+		}
+		.menu-page .dish-card {
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;
+			border-radius: 0.4rem;
+			background: var(--fondo);
+			box-shadow: 0 2px 10px rgb(23 23 23 / 12%);
+		}
+		.menu-page .dish-card img {
+			display: block;
+			width: 100%;
+			aspect-ratio: 16 / 10;
+			object-fit: cover;
+		}
+		.menu-page .dish-card-content {
+			display: flex;
+			flex: 1;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.6rem;
+		}
+		.menu-page .dish-card h3,
+		.menu-page .dish-card p {
+			margin: 0;
+		}
+		.menu-page .dish-select {
+			margin-top: auto;
+		}
+		.menu-page .dish-select[aria-pressed="true"] {
+			background: var(--rojo);
+		}
+		.menu-page blockquote {
+			margin: 0;
+		}
+		.menu-page #selection-status {
+			margin: 0 0 1rem;
+			font-weight: 700;
+		}
+		.offcanvas-backdrop {
+			position: fixed;
+			inset: 0;
+			z-index: 10;
+			background: rgb(0 0 0 / 50%);
+		}
+		.offcanvas {
+			position: fixed;
+			inset: 0 0 0 auto;
+			z-index: 11;
+			width: min(24rem, 90vw);
+			height: 100%;
+			padding: 1.5rem;
+			overflow-y: auto;
+			background: white;
+			box-shadow: 0 0 1rem rgb(0 0 0 / 25%);
+		}
+		.offcanvas img { display: block; width: 100%; height: auto; margin-block: 1rem; }
+	</style>
+</head>
+<body class="menu-page">
+	<header>
+		<nav aria-label="Navegación principal">
+			<ul>
+				<li><a href="index.html">Inicio</a></li>
+				<li><a href="#menu-categorias">Menú</a></li>
+				<li><a href="#ofertas">Ofertas</a></li>
+				<li><a href="#opiniones">Opiniones</a></li>
+				<li><a href="prueba2.html">Prueba2</a></li>
+				<li><a href="index.html#platillos">Platillos</a></li>
+				<li><a href="index.html#ubicacion">Ubicación</a></li>
+				<li><a href="index.html#bebidas">Bebidas</a></li>
+				<li><a href="index.html#horarios">Horarios</a></li>
+				<li><a href="index.html#instalaciones">Instalaciones</a></li>
+				<li><a href="index.html#historia">Historia</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main>
+		<h1 class="text-center text-danger">Menú</h1>
+		<p class="text-center">Explora las categorías y elige tus platillos favoritos.</p>
+		<button type="button" class="choose-dishes" id="choose-dishes">Escoger platillos</button>
+		<p id="selection-status" role="status" aria-live="polite">Aún no has seleccionado platillos.</p>
+		<button type="button" class="specials-button" id="open-specials" aria-controls="daily-specials" aria-expanded="false">
+			<span aria-hidden="true">✦</span>
+			Especiales del día
+			<span class="specials-badge">HOY</span>
+		</button>
+		<section id="ofertas" class="bg-light border-start border-danger p-4" aria-labelledby="offers-title">
+			<h2 class="text-center text-danger" id="offers-title">Ofertas especiales</h2>
+			<p class="text-center">Promociones de ejemplo. Consulta disponibilidad y precio en el restaurante.</p>
+			<div class="dish-grid">
+				<article class="dish-card border border-danger">
+					<img src="media/tacos.jpeg" alt="Tacos mexicanos incluidos en el combo taquero">
+					<div class="dish-card-content bg-light p-3">
+						<p class="bg-danger text-white p-2 text-center">Promoción de ejemplo</p>
+						<h3 class="text-center">Combo taquero</h3>
+						<p>Tacos de la casa acompañados de una bebida fresca.</p>
+						<button type="button" class="dish-select" data-dish-name="Combo taquero" aria-pressed="false">Seleccionar</button>
+					</div>
+				</article>
+				<article class="dish-card border border-warning">
+					<img src="media/pozole.jpeg" alt="Pozole mexicano para compartir">
+					<div class="dish-card-content bg-light p-3">
+						<p class="bg-warning text-dark p-2 text-center">Especial del día</p>
+						<h3 class="text-center">Pozole para compartir</h3>
+						<p>Pregunta por la disponibilidad del pozole y su acompañamiento especial.</p>
+						<button type="button" class="dish-select" data-dish-name="Pozole para compartir" aria-pressed="false">Seleccionar</button>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section class="menu-tabs" id="menu-categorias" aria-label="Categorías del menú">
+			<div role="tablist" aria-label="Categorías">
+				<button id="tab-entradas" role="tab" aria-selected="true" aria-controls="panel-entradas" tabindex="0">Entradas</button>
+				<button id="tab-plato-fuerte" role="tab" aria-selected="false" aria-controls="panel-plato-fuerte" tabindex="-1">Plato fuerte</button>
+				<button id="tab-bebidas" role="tab" aria-selected="false" aria-controls="panel-bebidas" tabindex="-1">Bebidas</button>
+				<button id="tab-postres" role="tab" aria-selected="false" aria-controls="panel-postres" tabindex="-1">Postres</button>
+				<button id="tab-especiales" role="tab" aria-selected="false" aria-controls="panel-especiales" tabindex="-1">Especiales</button>
+			</div>
+
+			<section id="panel-entradas" class="bg-light border-start border-success p-4" role="tabpanel" aria-labelledby="tab-entradas">
+				<h2 class="text-center">Entradas</h2>
+				<div class="dish-grid">
+					<article class="dish-card border border-success">
+						<img src="media/salsas.jpeg" alt="Variedad de salsas mexicanas">
+						<div class="dish-card-content bg-light p-3">
+							<h3>Salsas de la casa</h3>
+							<p>Una selección de salsas mexicanas para acompañar y compartir.</p>
+							<button type="button" class="dish-select" data-dish-name="Salsas de la casa" aria-pressed="false">Seleccionar</button>
+						</div>
+					</article>
+				</div>
+			</section>
+			<section id="panel-plato-fuerte" class="bg-light border-start border-danger p-4" role="tabpanel" aria-labelledby="tab-plato-fuerte" hidden>
+				<h2 class="text-center">Plato fuerte</h2>
+				<div class="dish-grid">
+					<article class="dish-card border border-danger">
+						<img src="media/tacos.jpeg" alt="Tacos mexicanos servidos para compartir">
+						<div class="dish-card-content bg-light p-3">
+							<h3>Tacos</h3>
+							<p>Tacos preparados con ingredientes frescos y mucho sabor.</p>
+							<button type="button" class="dish-select" data-dish-name="Tacos" aria-pressed="false">Seleccionar</button>
+						</div>
+					</article>
+					<article class="dish-card border border-warning">
+						<img src="media/pozole.jpeg" alt="Platillo de pozole mexicano">
+						<div class="dish-card-content bg-light p-3">
+							<h3>Pozole</h3>
+							<p>Pozole tradicional, ideal para disfrutar en familia.</p>
+							<button type="button" class="dish-select" data-dish-name="Pozole" aria-pressed="false">Seleccionar</button>
+						</div>
+					</article>
+					<article class="dish-card border border-primary">
+						<img src="media/Mole.jpg" alt="Mole servido con arroz y ajonjolí">
+						<div class="dish-card-content bg-light p-3">
+							<h3>Mole</h3>
+							<p>Un clásico de la cocina mexicana.</p>
+							<button type="button" class="dish-select" data-dish-name="Mole" aria-pressed="false">Seleccionar</button>
+						</div>
+					</article>
+					<article class="dish-card border border-success">
+						<img src="media/chiles.jpeg" alt="Chile en nogada cubierto con salsa y granada">
+						<div class="dish-card-content bg-light p-3">
+							<h3>Chile en nogada</h3>
+							<p>Un platillo lleno de color y tradición.</p>
+							<button type="button" class="dish-select" data-dish-name="Chile en nogada" aria-pressed="false">Seleccionar</button>
+						</div>
+					</article>
+				</div>
+			</section>
+			<section id="panel-bebidas" class="bg-light border-start border-primary p-4" role="tabpanel" aria-labelledby="tab-bebidas" hidden>
+				<h2 class="text-center">Bebidas</h2>
+				<div class="dish-grid">
+					<article class="dish-card border border-primary">
+						<img src="media/Aguas_frescas.jpg" alt="Aguas frescas mexicanas">
+						<div class="dish-card-content bg-light p-3">
+							<h3>Aguas frescas</h3>
+							<p>Bebidas frescas para acompañar tus platillos.</p>
+							<button type="button" class="dish-select" data-dish-name="Aguas frescas" aria-pressed="false">Seleccionar</button>
+						</div>
+					</article>
+					<article class="dish-card border border-success">
+						<img src="media/pulque.jpg" alt="Vaso de pulque">
+						<div class="dish-card-content bg-light p-3">
+							<h3>Pulque</h3>
+							<p>Una bebida tradicional mexicana.</p>
+							<button type="button" class="dish-select" data-dish-name="Pulque" aria-pressed="false">Seleccionar</button>
+						</div>
+					</article>
+					<article class="dish-card border border-warning">
+						<img src="media/tequila.jpg" alt="Tequila servido en un vaso">
+						<div class="dish-card-content bg-light p-3">
+							<h3>Tequila</h3>
+							<p>Disfruta esta bebida representativa de México.</p>
+							<button type="button" class="dish-select" data-dish-name="Tequila" aria-pressed="false">Seleccionar</button>
+						</div>
+					</article>
+				</div>
+			</section>
+			<section id="panel-postres" class="bg-light border-start border-warning p-4" role="tabpanel" aria-labelledby="tab-postres" hidden>
+				<h2 class="text-center">Postres</h2>
+				<div class="dish-grid">
+					<article class="dish-card border border-warning">
+						<img src="media/postres.jpg" alt="Postres">
+						<div class="dish-card-content bg-light p-3">
+							<h3>Postre de temporada</h3>
+							<p>Pregunta por el postre disponible del día.</p>
+							<button type="button" class="dish-select" data-dish-name="Postre de temporada" aria-pressed="false">Seleccionar</button>
+						</div>
+					</article>
+				</div>
+			</section>
+			<section id="panel-especiales" class="bg-light border-start border-danger p-4" role="tabpanel" aria-labelledby="tab-especiales" hidden>
+				<h2 class="text-center text-danger">Especiales</h2>
+				<div class="dish-grid">
+					<article class="dish-card border border-danger">
+						<img src="media/pozole.jpeg" alt="Pozole mexicano, platillo especial del día">
+						<div class="dish-card-content bg-light p-3">
+							<h3>Platillo especial</h3>
+							<p>Promoción de ejemplo: consulta cuál es el platillo preparado hoy, su disponibilidad y precio.</p>
+							<button type="button" class="dish-select" data-dish-name="Platillo especial" aria-pressed="false">Seleccionar</button>
+						</div>
+					</article>
+				</div>
+			</section>
+		</section>
+		<section id="opiniones" class="bg-light border-start border-primary p-4" aria-labelledby="opiniones-title">
+			<h2 class="text-center" id="opiniones-title">Opiniones de ejemplo</h2>
+			<p class="text-center">Testimonios de muestra para destacar la experiencia de nuestros comensales.</p>
+			<div class="dish-grid">
+				<article class="dish-card border border-success">
+					<div class="dish-card-content bg-light p-3">
+						<p class="text-center text-danger">5 de 5</p>
+						<blockquote class="text-center">“El pozole tenía un sabor casero y la porción fue generosa.”</blockquote>
+						<p class="text-end"><strong>Cliente de ejemplo</strong></p>
+					</div>
+				</article>
+				<article class="dish-card border border-warning">
+					<div class="dish-card-content bg-light p-3">
+						<p class="text-center text-danger">5 de 5</p>
+						<blockquote class="text-center">“Las salsas estaban frescas y los tacos llegaron recién preparados.”</blockquote>
+						<p class="text-end"><strong>Cliente de ejemplo</strong></p>
+					</div>
+				</article>
+				<article class="dish-card border border-primary">
+					<div class="dish-card-content bg-light p-3">
+						<p class="text-center text-danger">5 de 5</p>
+						<blockquote class="text-center">“Hay buena variedad de bebidas para acompañar la comida.”</blockquote>
+						<p class="text-end"><strong>Cliente de ejemplo</strong></p>
+					</div>
+				</article>
+			</div>
+		</section>
+
+	</main>
+
+	<div class="offcanvas-backdrop" id="specials-backdrop" hidden></div>
+	<aside class="offcanvas" id="daily-specials" role="dialog" aria-modal="true" aria-labelledby="specials-title" hidden>
+		<button type="button" id="close-specials" aria-label="Cerrar especiales del día">Cerrar</button>
+		<h2 id="specials-title">Especiales del día</h2>
+		<img src="media/tequila.jpg" alt="Tequila servido en un vaso">
+		<p>Disfruta nuestros especiales del día, preparados para acompañar tu comida.</p>
+	</aside>
+
+	<script>
+		const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+		tabs.forEach((tab, index) => {
+			tab.addEventListener('click', () => activateTab(tab));
+			tab.addEventListener('keydown', (event) => {
+				if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+				event.preventDefault();
+				const nextIndex = event.key === 'Home' ? 0
+					: event.key === 'End' ? tabs.length - 1
+					: (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+				activateTab(tabs[nextIndex]);
+				tabs[nextIndex].focus();
+			});
+		});
+
+		function activateTab(selectedTab) {
+			tabs.forEach((tab) => {
+				const selected = tab === selectedTab;
+				tab.setAttribute('aria-selected', selected);
+				tab.tabIndex = selected ? 0 : -1;
+				document.getElementById(tab.getAttribute('aria-controls')).hidden = !selected;
+			});
+		}
+
+		const specialsPanel = document.getElementById('daily-specials');
+		const specialsBackdrop = document.getElementById('specials-backdrop');
+		const openSpecialsButton = document.getElementById('open-specials');
+		const closeSpecialsButton = document.getElementById('close-specials');
+		const chooseDishesButton = document.getElementById('choose-dishes');
+		const selectionStatus = document.getElementById('selection-status');
+		const selectedDishes = new Set();
+
+		chooseDishesButton.addEventListener('click', () => {
+			document.getElementById('menu-categorias').scrollIntoView();
+			tabs[0].focus();
+		});
+
+		document.querySelectorAll('.dish-select').forEach((button) => {
+			button.addEventListener('click', () => {
+				const dishName = button.dataset.dishName;
+				if (selectedDishes.has(dishName)) {
+					selectedDishes.delete(dishName);
+					button.setAttribute('aria-pressed', 'false');
+					button.textContent = 'Seleccionar';
+				} else {
+					selectedDishes.add(dishName);
+					button.setAttribute('aria-pressed', 'true');
+					button.textContent = 'Quitar selección';
+				}
+
+				const count = selectedDishes.size;
+				selectionStatus.textContent = count === 0
+					? 'Aún no has seleccionado platillos.'
+					: `${count} ${count === 1 ? 'platillo seleccionado' : 'platillos seleccionados'}: ${Array.from(selectedDishes).join(', ')}.`;
+			});
+		});
+
+		function openSpecials() {
+			specialsPanel.hidden = false;
+			specialsBackdrop.hidden = false;
+			openSpecialsButton.setAttribute('aria-expanded', 'true');
+			closeSpecialsButton.focus();
+		}
+
+		function closeSpecials() {
+			specialsPanel.hidden = true;
+			specialsBackdrop.hidden = true;
+			openSpecialsButton.setAttribute('aria-expanded', 'false');
+			openSpecialsButton.focus();
+		}
+
+		openSpecialsButton.addEventListener('click', openSpecials);
+		closeSpecialsButton.addEventListener('click', closeSpecials);
+		specialsBackdrop.addEventListener('click', closeSpecials);
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape' && !specialsPanel.hidden) closeSpecials();
+		});
+	</script>
+</body>
+</html>

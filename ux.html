@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Información sobre la experiencia de usuario de El Buen Sazón.">
+  <title>Experiencia de usuario | El Buen Sazón</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .feedback-form {
+      display: grid;
+      gap: 1rem;
+    }
+    .feedback-form > label,
+    .feedback-form fieldset {
+      display: grid;
+      gap: 0.5rem;
+    }
+    .feedback-form fieldset {
+      border: 1px solid var(--verde);
+      border-radius: 0.35rem;
+    }
+    .feedback-form .choice {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+    }
+    .feedback-form input[type="text"],
+    .feedback-form select,
+    .feedback-form textarea {
+      width: 100%;
+      max-width: 36rem;
+      padding: 0.65rem;
+      border: 1px solid #767676;
+      border-radius: 0.25rem;
+      font: inherit;
+    }
+    .feedback-form textarea {
+      resize: vertical;
+    }
+    .feedback-form button {
+      justify-self: start;
+      padding: 0.7rem 1rem;
+      border: 0;
+      border-radius: 0.35rem;
+      background: var(--rojo);
+      color: white;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Experiencia de usuario</h1>
+    <h2>El Buen Sazón</h2>
+    <p>Conoce cómo diseñamos una experiencia agradable y accesible para nuestros visitantes.</p>
+
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="menu.html">Menú</a></li>
+        <li><a href="prueba2.html">Prueba2</a></li>
+        <li><a href="#necesidades">Necesidades</a></li>
+        <li><a href="#experiencia">Experiencia</a></li>
+        <li><a href="#mejoras">Mejoras</a></li>
+        <li><a href="#experiencia-usuario">Comparte tu opinión</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="necesidades">
+      <h2>Necesidades de las personas</h2>
+      <p>Agrega aquí la información sobre las necesidades y expectativas de quienes visitan el restaurante.</p>
+    </section>
+
+    <section id="experiencia">
+      <h2>Experiencia de visita</h2>
+      <p>Describe aquí cómo las personas descubren el menú, eligen sus platillos y disfrutan su visita.</p>
+    </section>
+
+    <section id="mejoras">
+      <h2>Oportunidades de mejora</h2>
+      <p>Incluye aquí propuestas para hacer que la experiencia sea más clara, cómoda y accesible.</p>
+    </section>
+
+    <section id="experiencia-usuario">
+      <h2>Cuéntanos sobre tu experiencia</h2>
+      <form class="feedback-form">
+        <label for="feedback-name">Nombre</label>
+        <input id="feedback-name" name="nombre" type="text" autocomplete="name">
+
+        <fieldset>
+          <legend>¿Qué te pareció el servicio?</legend>
+          <div class="choice">
+            <label><input type="radio" name="servicio" value="malo"> Malo</label>
+            <label><input type="radio" name="servicio" value="regular"> Regular</label>
+            <label><input type="radio" name="servicio" value="bueno"> Bueno</label>
+            <label><input type="radio" name="servicio" value="excelente"> Excelente</label>
+          </div>
+        </fieldset>
+
+        <label for="recomendacion">¿Lo recomendarías?</label>
+        <select id="recomendacion" name="recomendacion">
+          <option value="si">Sí</option>
+          <option value="no">No</option>
+        </select>
+
+        <fieldset>
+          <legend>¿Qué consumiste?</legend>
+          <div class="choice">
+            <label><input type="checkbox" name="consumo" value="entradas"> Entradas</label>
+            <label><input type="checkbox" name="consumo" value="plato-fuerte"> Plato fuerte</label>
+            <label><input type="checkbox" name="consumo" value="postres"> Postres</label>
+            <label><input type="checkbox" name="consumo" value="bebidas"> Bebidas</label>
+          </div>
+        </fieldset>
+
+        <label for="comentarios">Cuéntanos más sobre tu experiencia</label>
+        <textarea id="comentarios" name="comentarios" rows="5"></textarea>
+
+        <button type="submit">Enviar opinión</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 El Buen Sazón. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

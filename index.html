@@ -4,18 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Conoce nuestro restaurante mexicano: platillos, bebidas, historia y más.">
-  <title>El Buen Sazón | Restaurante mexicano</title>
+  <title>El Buen Sazón | Restaurante mexicano de platillos tradicionales</title>
+  <meta name="description" content="Descubre El Buen Sazón, un restaurante mexicano con tacos, pozole, mole, chiles en nogada, salsas y bebidas tradicionales. Conoce nuestra ubicación, horarios e historia.">
+  <meta name="keywords" content="restaurante mexicano, tacos, pozole, mole, chiles en nogada, salsas mexicanas, bebidas mexicanas, comida tradicional mexicana">
+  <meta name="author" content="Alejandro Javier Arredondo García">
+  <meta name="copyright" content="Copyright 2026 El Buen Sazón. Todos los derechos reservados.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="container">
+
   <header>
-    <h1>Sazón 100% Mexicano</h1>
-    <h2>¡Cada bocado, una fiesta de sabor mexicano!</h2>
+    <h1 class="text-primary">Sazón 100% Mexicano</h1>
+    <h2 class="text-success">¡Cada bocado, una fiesta de sabor mexicano!</h2>
     <p>En El Buen Sazón compartimos el sabor y la tradición de la cocina mexicana. Descubre nuestros platillos y bebidas, y conoce la historia que inspira cada visita.</p>
 
     <nav aria-label="Navegación principal">
       <ul>
+        <li><a href="menu.html">Menú</a></li>
+        <li><a href="ux.html">Experiencia de usuario</a></li>
+        <li><a href="prueba2.html">Prueba2</a></li>
         <li><a href="#platillos">Platillos</a></li>
         <li><a href="#ubicacion">Ubicación</a></li>
         <li><a href="#bebidas">Bebidas</a></li>
@@ -67,6 +76,45 @@
     <section id="bebidas">
       <h2>Bebidas</h2>
       <p>Conoce nuestra selección de bebidas.</p>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBebidas">
+        Ver bebidas
+      </button>
+
+      <div class="modal fade" id="modalBebidas" tabindex="-1" aria-labelledby="modalBebidasLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title fs-5" id="modalBebidasLabel">Nuestras bebidas</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <figure>
+                    <img src="media/Aguas_frescas.jpg" class="img-fluid rounded" alt="Aguas frescas mexicanas">
+                    <figcaption class="mt-2">Aguas frescas</figcaption>
+                  </figure>
+                </div>
+                <div class="col-md-4">
+                  <figure>
+                    <img src="media/pulque.jpg" class="img-fluid rounded" alt="Vaso de pulque">
+                    <figcaption class="mt-2">Pulque</figcaption>
+                  </figure>
+                </div>
+                <div class="col-md-4">
+                  <figure>
+                    <img src="media/tequila.jpg" class="img-fluid rounded" alt="Tequila servido en un vaso">
+                    <figcaption class="mt-2">Tequila</figcaption>
+                  </figure>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="horarios">
@@ -77,6 +125,32 @@
     <section id="instalaciones">
       <h2>Instalaciones</h2>
       <p>Conoce los espacios que tenemos para recibirte.</p>
+      <div id="carouselInstalaciones" class="carousel slide" data-bs-ride="carousel" aria-label="Galería de las instalaciones">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselInstalaciones" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Instalación 1"></button>
+          <button type="button" data-bs-target="#carouselInstalaciones" data-bs-slide-to="1" aria-label="Instalación 2"></button>
+          <button type="button" data-bs-target="#carouselInstalaciones" data-bs-slide-to="2" aria-label="Instalación 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="media/instalacion1.jpg" class="d-block w-100" alt="Interior del restaurante, instalación 1">
+          </div>
+          <div class="carousel-item">
+            <img src="media/instalacion2.jpg" class="d-block w-100" alt="Interior del restaurante, instalación 2">
+          </div>
+          <div class="carousel-item">
+            <img src="media/instalacion3.jpg" class="d-block w-100" alt="Interior del restaurante, instalación 3">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselInstalaciones" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselInstalaciones" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+      </div>
     </section>
 
     <section id="historia">
@@ -95,8 +169,10 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 El Buen Sazón. Todos los derechos reservados.</p>
+    <p class="text-secondary">&copy; 2026 El Buen Sazón. Todos los derechos reservados.</p>
     <a href="https://www.google.com/">Ir a Google</a>
   </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
